@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Class Summary</string>
+    <string name="title_activity_class_summary">ClassSummaryActivity</string>
+    <string name="class_summary">Class Summary</string>
+    <string name="lecture_summary">Insert the keywords or phrases discussed in the class. Each keyword or phrase must be separated by comma (,).</string>
+    <string name="rules">Rules:\n1. Username Length: &gt;4, &lt;8 \n2. UserID Length: &gt;4, &lt;6\n3. Password Length: 4</string>
+</resources>
