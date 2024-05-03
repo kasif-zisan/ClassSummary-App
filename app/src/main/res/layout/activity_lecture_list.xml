@@ -18,6 +18,18 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"/>
 
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight = "1"
+        android:layout_margin="4dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/tvCourse"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutButtons"/>
+
+
     <LinearLayout
         android:id="@+id/linearLayoutButtons"
         android:layout_width="match_parent"
@@ -29,11 +41,11 @@
         android:layout_marginBottom="8dp">
 
         <Button
-            android:id="@+id/btnExit"
+            android:id="@+id/btnBack"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Exit"
+            android:text="Back"
             android:backgroundTint="#ffbb00"
             android:textColor="@color/black"/>
         <TextView

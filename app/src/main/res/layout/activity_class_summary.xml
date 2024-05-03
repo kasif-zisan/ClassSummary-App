@@ -40,7 +40,7 @@
 
                 <TextView
                     android:padding="4dp"
-                    android:text=":Kasif Hasnaen Zisan"
+                    android:text="Kasif Hasnaen Zisan"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -56,7 +56,7 @@
 
                 <TextView
                     android:padding="4dp"
-                    android:text=":2020-1-60-028"
+                    android:text="2020-1-60-028"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -71,65 +71,17 @@
                     android:textStyle="bold"
                     android:layout_marginTop="7dp"/>
 
-                <RadioGroup
-                    android:id="@+id/courseGroup1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/CSE477"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CSE477"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
-
-                    <RadioButton
-                        android:id="@+id/CSE479"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CSE479"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
-                </RadioGroup>
-
-            </TableRow>
-
-            <TableRow>
-
                 <TextView
-                    android:text=""
+                    android:id="@+id/etCourse"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textColorHint="@color/black"
+                    android:paddingStart="4dp"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="6dp"/>
 
-                <RadioGroup
-                    android:id="@+id/courseGroup2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/CSE489"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CSE489"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
-
-                    <RadioButton
-                        android:id="@+id/CSE495"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CSE495"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
-                </RadioGroup>
 
             </TableRow>
 
