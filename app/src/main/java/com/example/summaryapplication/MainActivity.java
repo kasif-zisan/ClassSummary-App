@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnCSE477 = findViewById(R.id.btnCSE479);
         Button btnCSE489 = findViewById(R.id.btnCSE489);
         Button btnCSE495 = findViewById(R.id.btnCSE495);
+        Button btnExit = findViewById(R.id.btnExit);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
@@ -30,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         };
+
+        btnExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btnCSE475.setOnClickListener(listener);
         btnCSE477.setOnClickListener(listener);
