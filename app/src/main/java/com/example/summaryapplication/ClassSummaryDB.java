@@ -18,7 +18,7 @@ public class ClassSummaryDB extends SQLiteOpenHelper {
                 + "ID TEXT PRIMARY KEY,"
                 + "course TEXT,"
                 + "type TEXT,"
-                + "datetime TEXT,"
+                + "datetime INTEGER,"
                 + "lecture TEXT,"
                 + "topic TEXT,"
                 + "summary TEXT"
@@ -34,7 +34,7 @@ public class ClassSummaryDB extends SQLiteOpenHelper {
         // db.execSQL("CREATE TABLE  ......");
     }
 
-    public void insertLecture(String ID, String course, String type, String date, String lecture, String topic, String summary) {
+    public void insertLecture(String ID, String course, String type, Long date, String lecture, String topic, String summary) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cols = new ContentValues();
         cols.put("ID", ID);
@@ -48,7 +48,7 @@ public class ClassSummaryDB extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void updateLecture(String ID, String course, String type, String date, String lecture, String topic, String summary) {
+    public void updateLecture(String ID, String course, String type, Long date, String lecture, String topic, String summary) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cols = new ContentValues();
         cols.put("course", course);

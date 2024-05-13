@@ -3,17 +3,29 @@ package com.example.summaryapplication;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.NameValuePair;
+import com.google.firebase.crashlytics.buildtools.reloc.org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 public class ClassSummaryActivity extends AppCompatActivity {
 
@@ -22,6 +34,8 @@ public class ClassSummaryActivity extends AppCompatActivity {
 
     private String errMsg = "";
     private String course = "";
+
+    private long dateLong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +54,7 @@ public class ClassSummaryActivity extends AppCompatActivity {
             tvCourse.setText(course);
         }
 
-
+        final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
 
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +67,15 @@ public class ClassSummaryActivity extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        etDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        String dateString = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+                        try {
+                            Date date = sdf.parse(dateString);
+                            assert date != null;
+                            dateLong = date.getTime();
+                            etDate.setText(dateString);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }, year, month, day);
                 datePickerDialog.show();
@@ -75,7 +97,6 @@ public class ClassSummaryActivity extends AppCompatActivity {
 
     }
     private void processSummary(){
-        String classDate = etDate.getText().toString();
         String lectureNumber = etLecture.getText().toString();
         String classTopic = etTopic.getText().toString();
         String classSummary = etSummary.getText().toString();
@@ -107,21 +128,23 @@ public class ClassSummaryActivity extends AppCompatActivity {
         ClassSummaryDB dbHelper = new ClassSummaryDB(this);
         if (summaryID.isEmpty()){
             summaryID = classTopic + System.currentTimeMillis();
-            dbHelper.insertLecture(summaryID, course, type, classDate, lectureNumber, classTopic, classSummary);
+            dbHelper.insertLecture(summaryID, course, type, dateLong, lectureNumber, classTopic, classSummary);
             finish();
             
         }
         else{
-            dbHelper.updateLecture(summaryID, course, type, classDate, lectureNumber, classTopic, classSummary);
+            dbHelper.updateLecture(summaryID, course, type, dateLong, lectureNumber, classTopic, classSummary);
         }
 
-        //Intent i = new Intent(ClassSummaryActivity.this, PrintClassSummary.class);
+        String[] keys = {"action", "sid", "semester", "id", "course", "type", "topic", "date", "lecture", "summary"};
+        String[] values = {"backup", "2020-1-60-028", "2024-1", summaryID, course, type, classTopic, String.valueOf(dateLong), lectureNumber, classSummary};
+
+        httpRequest(keys, values);
+
         Intent i = new Intent(ClassSummaryActivity.this, LectureListActivity.class);
         i.putExtra("Course", course);
         startActivity(i);
         finish();
-
-
     }
 
     private void showErrorDialog(String errMsg){
@@ -138,4 +161,32 @@ public class ClassSummaryActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+
+    private void httpRequest(final String[] keys, final String[] values){
+        new AsyncTask<Void,Void,String>(){
+            @Override
+            protected String doInBackground(Void... voids) {
+                List<NameValuePair> params=new ArrayList<NameValuePair>();
+                for (int i=0; i<keys.length; i++){
+                    params.add(new BasicNameValuePair(keys[i],values[i]));
+                }
+                String url= "https://www.muthosoft.com/univ/cse489/index.php";
+                try {
+                    String data= RemoteAccess.getInstance().makeHttpRequest(url,"POST",params);
+                    return data;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+            protected void onPostExecute(String data){
+                if(data!=null){
+                    Toast.makeText(getApplicationContext(),data,Toast.LENGTH_SHORT).show();
+                }
+            }
+        }.execute();
+    }
+
+
 }

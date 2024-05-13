@@ -24,7 +24,7 @@ public class PrintClassSummary extends AppCompatActivity {
                 String id = cursor.getString(0);
                 String course = cursor.getString(1);
                 String type = cursor.getString(2);
-                String date = cursor.getString(3);
+                long date = cursor.getLong(3);
                 String lecture = cursor.getString(4);
                 String topic = cursor.getString(5);
                 String summary = cursor.getString(6);

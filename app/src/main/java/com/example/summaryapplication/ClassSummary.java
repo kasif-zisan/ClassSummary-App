@@ -4,12 +4,12 @@ public class ClassSummary {
     String ID = "";
     String course = "";
     String type = "";
-    String date = "";
+    long date;
     String lecture = "";
     String topic = "";
     String summary = "";
 
-    public ClassSummary(String ID, String course, String type, String date, String lecture, String topic, String summary){
+    public ClassSummary(String ID, String course, String type, long date, String lecture, String topic, String summary){
         this.ID = ID;
         this.course = course;
         this.type = type;

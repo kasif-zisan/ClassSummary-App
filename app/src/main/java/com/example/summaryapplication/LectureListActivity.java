@@ -39,7 +39,6 @@ public class LectureListActivity extends AppCompatActivity {
                 Intent intent = new Intent(LectureListActivity.this, ClassSummaryActivity.class);
                 intent.putExtra("Course", courseName);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -47,8 +46,6 @@ public class LectureListActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LectureListActivity.this, MainActivity.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -68,7 +65,7 @@ public class LectureListActivity extends AppCompatActivity {
                 String id = cursor.getString(0);
                 String course = cursor.getString(1);
                 String type = cursor.getString(2);
-                String date = cursor.getString(3);
+                long date = cursor.getLong(3);
                 String lecture = cursor.getString(4);
                 String topic = cursor.getString(5);
                 String summary = cursor.getString(6);

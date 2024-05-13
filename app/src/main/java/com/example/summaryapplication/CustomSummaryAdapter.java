@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class CustomSummaryAdapter extends ArrayAdapter<ClassSummary> {
     private final Context context;
@@ -34,7 +37,10 @@ public class CustomSummaryAdapter extends ArrayAdapter<ClassSummary> {
 
         ClassSummary e = values.get(position);
         lectureTitle.setText(e.lecture);
-        lectureDate.setText(e.date);
+        Date date = new Date(e.date);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String dateString = sdf.format(date);
+        lectureDate.setText(dateString);
         lectureSummary.setText(e.topic);
         return rowView;
     }
