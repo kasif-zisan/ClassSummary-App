@@ -45,6 +45,7 @@
                     android:id="@+id/etUserId"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     android:inputType="text"/>
             </TableRow>
 
@@ -64,6 +65,7 @@
                     android:id="@+id/etPW"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textColor="@color/black"
                     android:inputType="numberPassword"/>
             </TableRow>
             <CheckBox
